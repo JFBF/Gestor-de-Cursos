@@ -190,11 +190,11 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="Admin\AdminCursos.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Cursos\CrearCurso.aspx" />
     <Content Include="Cursos\Cursos.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
@@ -208,6 +208,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Cursos\Web.config" />
+    <Content Include="Admin\Web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -349,6 +350,13 @@
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\AdminCursos.aspx.cs">
+      <DependentUpon>AdminCursos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AdminCursos.aspx.designer.cs">
+      <DependentUpon>AdminCursos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -366,13 +374,6 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Cursos\CrearCurso.aspx.cs">
-      <DependentUpon>CrearCurso.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Cursos\CrearCurso.aspx.designer.cs">
-      <DependentUpon>CrearCurso.aspx</DependentUpon>
     </Compile>
     <Compile Include="Cursos\Cursos.aspx.cs">
       <DependentUpon>Cursos.aspx</DependentUpon>

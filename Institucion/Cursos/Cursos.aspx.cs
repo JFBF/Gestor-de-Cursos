@@ -20,8 +20,8 @@ namespace Institucion.Cursos
         protected void botonDetalle_Click(object sender, EventArgs e)
         {
             // enviar otra página.
-            var i = ListView1.SelectedIndex;
-            var curso = ListView1.Items[i];
+            //var i = ListView1.SelectedIndex;
+            //var curso = ListView1.Items[i];
         }
     }
 }
