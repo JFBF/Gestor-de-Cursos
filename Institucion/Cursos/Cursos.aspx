@@ -2,19 +2,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CssClass="table" AllowPaging="True">
         <Columns>
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
             <asp:BoundField DataField="Area" HeaderText="Area" SortExpression="Area" />
             <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
             <asp:BoundField DataField="Max" HeaderText="Max" SortExpression="Max" />
+            <asp:CheckBoxField DataField="Habilitado" HeaderText="Habilitado" SortExpression="Habilitado" />
         </Columns>
     </asp:GridView>
     <br />
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DefaultConnection %>" SelectCommand="SELECT [Nombre], [Area], [Descripcion], [Max] FROM [Curso] WHERE ([Habilitado] = @Habilitado)">
-        <SelectParameters>
-            <asp:Parameter DefaultValue="true" Name="Habilitado" Type="Boolean" />
-        </SelectParameters>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Nombre], [Area], [Descripcion], [Max], [Habilitado] FROM [Curso]">
     </asp:SqlDataSource>
     <br />
     <br />
