@@ -14,6 +14,12 @@ namespace Institucion
     
     public partial class AspNetUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AspNetUser()
+        {
+            this.CursoXEstudiantes = new HashSet<CursoXEstudiante>();
+        }
+    
         public string Id { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
@@ -30,5 +36,8 @@ namespace Institucion
         public string Apellido { get; set; }
         public string Cedula { get; set; }
         public string FechaNacimiento { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CursoXEstudiante> CursoXEstudiantes { get; set; }
     }
 }

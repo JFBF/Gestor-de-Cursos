@@ -20,6 +20,7 @@
     <Property Name="Apellido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Cedula" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="FechaNacimiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CursoXEstudiantes" Relationship="Model.FK_CursoXEstudiante_ToTable_1" FromRole="AspNetUser" ToRole="CursoXEstudiante" />
   </EntityType>
   <EntityType Name="Curso">
     <Key>
@@ -34,6 +35,7 @@
     <Property Name="IdInstitucion" Type="Int32" Nullable="false" />
     <Property Name="Habilitado" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Institucion" Relationship="Self.FK_Curso_ToTable" FromRole="Curso" ToRole="Institucion" />
+    <NavigationProperty Name="CursoXEstudiantes" Relationship="Model.FK_CursoXEstudiante_ToTable" FromRole="Curso" ToRole="CursoXEstudiante" />
   </EntityType>
   <EntityType Name="Institucion">
     <Key>
@@ -63,5 +65,48 @@
       <End Role="Institucion" EntitySet="Institucions" />
       <End Role="Curso" EntitySet="Cursoes" />
     </AssociationSet>
+    <EntitySet Name="CursoXEstudiantes" EntityType="Model.CursoXEstudiante" />
+    <AssociationSet Name="FK_CursoXEstudiante_ToTable_1" Association="Model.FK_CursoXEstudiante_ToTable_1">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="CursoXEstudiante" EntitySet="CursoXEstudiantes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CursoXEstudiante_ToTable" Association="Model.FK_CursoXEstudiante_ToTable">
+      <End Role="Curso" EntitySet="Cursoes" />
+      <End Role="CursoXEstudiante" EntitySet="CursoXEstudiantes" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="CursoXEstudiante">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="IdCurso" Type="Int32" Nullable="false" />
+    <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="AspNetUser" Relationship="Model.FK_CursoXEstudiante_ToTable_1" FromRole="CursoXEstudiante" ToRole="AspNetUser" />
+    <NavigationProperty Name="Curso" Relationship="Model.FK_CursoXEstudiante_ToTable" FromRole="CursoXEstudiante" ToRole="Curso" />
+  </EntityType>
+  <Association Name="FK_CursoXEstudiante_ToTable_1">
+    <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="Model.CursoXEstudiante" Role="CursoXEstudiante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CursoXEstudiante">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CursoXEstudiante_ToTable">
+    <End Type="Model.Curso" Role="Curso" Multiplicity="1" />
+    <End Type="Model.CursoXEstudiante" Role="CursoXEstudiante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CursoXEstudiante">
+        <PropertyRef Name="IdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

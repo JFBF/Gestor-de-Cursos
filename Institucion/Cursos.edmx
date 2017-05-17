@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -39,6 +39,14 @@
           <Property Name="IdInstitucion" Type="int" Nullable="false" />
           <Property Name="Habilitado" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="CursoXEstudiante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="IdCurso" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="Institucion">
           <Key>
             <PropertyRef Name="Id" />
@@ -58,17 +66,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CursoXEstudiante_ToTable">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+          <End Role="CursoXEstudiante" Type="Self.CursoXEstudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CursoXEstudiante">
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursoXEstudiante_ToTable_1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="CursoXEstudiante" Type="Self.CursoXEstudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CursoXEstudiante">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Curso" EntityType="Self.Curso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CursoXEstudiante" EntityType="Self.CursoXEstudiante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Institucion" EntityType="Self.Institucion" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Curso_ToTable" Association="Self.FK_Curso_ToTable">
             <End Role="Institucion" EntitySet="Institucion" />
             <End Role="Curso" EntitySet="Curso" />
           </AssociationSet>
+          <AssociationSet Name="FK_CursoXEstudiante_ToTable" Association="Self.FK_CursoXEstudiante_ToTable">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="CursoXEstudiante" EntitySet="CursoXEstudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursoXEstudiante_ToTable_1" Association="Self.FK_CursoXEstudiante_ToTable_1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="CursoXEstudiante" EntitySet="CursoXEstudiante" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -92,6 +132,7 @@
           <Property Name="Apellido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Cedula" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FechaNacimiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CursoXEstudiantes" Relationship="Model.FK_CursoXEstudiante_ToTable_1" FromRole="AspNetUser" ToRole="CursoXEstudiante" />
         </EntityType>
         <EntityType Name="Curso">
           <Key>
@@ -106,6 +147,7 @@
           <Property Name="IdInstitucion" Type="Int32" Nullable="false" />
           <Property Name="Habilitado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Institucion" Relationship="Self.FK_Curso_ToTable" FromRole="Curso" ToRole="Institucion" />
+          <NavigationProperty Name="CursoXEstudiantes" Relationship="Model.FK_CursoXEstudiante_ToTable" FromRole="Curso" ToRole="CursoXEstudiante" />
         </EntityType>
         <EntityType Name="Institucion">
           <Key>
@@ -135,7 +177,50 @@
             <End Role="Institucion" EntitySet="Institucions" />
             <End Role="Curso" EntitySet="Cursoes" />
           </AssociationSet>
+          <EntitySet Name="CursoXEstudiantes" EntityType="Model.CursoXEstudiante" />
+          <AssociationSet Name="FK_CursoXEstudiante_ToTable_1" Association="Model.FK_CursoXEstudiante_ToTable_1">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="CursoXEstudiante" EntitySet="CursoXEstudiantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CursoXEstudiante_ToTable" Association="Model.FK_CursoXEstudiante_ToTable">
+            <End Role="Curso" EntitySet="Cursoes" />
+            <End Role="CursoXEstudiante" EntitySet="CursoXEstudiantes" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="CursoXEstudiante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_CursoXEstudiante_ToTable_1" FromRole="CursoXEstudiante" ToRole="AspNetUser" />
+          <NavigationProperty Name="Curso" Relationship="Model.FK_CursoXEstudiante_ToTable" FromRole="CursoXEstudiante" ToRole="Curso" />
+        </EntityType>
+        <Association Name="FK_CursoXEstudiante_ToTable_1">
+          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="Model.CursoXEstudiante" Role="CursoXEstudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CursoXEstudiante">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CursoXEstudiante_ToTable">
+          <End Type="Model.Curso" Role="Curso" Multiplicity="1" />
+          <End Type="Model.CursoXEstudiante" Role="CursoXEstudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CursoXEstudiante">
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -183,6 +268,15 @@
               <MappingFragment StoreEntitySet="Institucion">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CursoXEstudiantes">
+            <EntityTypeMapping TypeName="Model.CursoXEstudiante">
+              <MappingFragment StoreEntitySet="CursoXEstudiante">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

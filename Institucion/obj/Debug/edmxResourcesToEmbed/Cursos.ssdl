@@ -34,6 +34,14 @@
     <Property Name="IdInstitucion" Type="int" Nullable="false" />
     <Property Name="Habilitado" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="CursoXEstudiante">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="IdCurso" Type="int" Nullable="false" />
+    <Property Name="IdUsuario" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
   <EntityType Name="Institucion">
     <Key>
       <PropertyRef Name="Id" />
@@ -53,13 +61,46 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_CursoXEstudiante_ToTable">
+    <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+    <End Role="CursoXEstudiante" Type="Self.CursoXEstudiante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curso">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CursoXEstudiante">
+        <PropertyRef Name="IdCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CursoXEstudiante_ToTable_1">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="CursoXEstudiante" Type="Self.CursoXEstudiante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CursoXEstudiante">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Curso" EntityType="Self.Curso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CursoXEstudiante" EntityType="Self.CursoXEstudiante" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Institucion" EntityType="Self.Institucion" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Curso_ToTable" Association="Self.FK_Curso_ToTable">
       <End Role="Institucion" EntitySet="Institucion" />
       <End Role="Curso" EntitySet="Curso" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CursoXEstudiante_ToTable" Association="Self.FK_CursoXEstudiante_ToTable">
+      <End Role="Curso" EntitySet="Curso" />
+      <End Role="CursoXEstudiante" EntitySet="CursoXEstudiante" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CursoXEstudiante_ToTable_1" Association="Self.FK_CursoXEstudiante_ToTable_1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="CursoXEstudiante" EntitySet="CursoXEstudiante" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -45,5 +45,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CursoXEstudiantes">
+      <EntityTypeMapping TypeName="Model.CursoXEstudiante">
+        <MappingFragment StoreEntitySet="CursoXEstudiante">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -28,5 +28,6 @@ namespace Institucion
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Curso> Cursoes { get; set; }
         public virtual DbSet<Institucion> Institucions { get; set; }
+        public virtual DbSet<CursoXEstudiante> CursoXEstudiantes { get; set; }
     }
 }
