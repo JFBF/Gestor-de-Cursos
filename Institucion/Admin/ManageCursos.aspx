@@ -9,7 +9,7 @@
             <asp:BoundField DataField="Area" HeaderText="Area" SortExpression="Area" />
             <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
             <asp:BoundField DataField="GUID" HeaderText="GUID" SortExpression="GUID" />
-            <asp:BoundField DataField="Max" HeaderText="Max" SortExpression="Max" />
+            <asp:BoundField DataField="Max" HeaderText="Cupos disponibles" SortExpression="Max" />
             <asp:BoundField DataField="IdInstitucion" HeaderText="IdInstitucion" SortExpression="IdInstitucion" />
             <asp:CheckBoxField DataField="Habilitado" HeaderText="Habilitado" SortExpression="Habilitado" />
         </Columns>

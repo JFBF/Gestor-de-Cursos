@@ -24,7 +24,8 @@ namespace Institucion.Admin
             curso.Max = Max.Text;
             curso.Habilitado = Habilitado.Checked;
             // Web service called
-            curso.GUID = "11";
+            ServiceReference1.Service1Client client = new ServiceReference1.Service1Client();
+            curso.GUID = client.ObtenerGUID(curso.Nombre).ToString();
             curso.IdInstitucion = 1;
 
             Entities cursos = new Entities();

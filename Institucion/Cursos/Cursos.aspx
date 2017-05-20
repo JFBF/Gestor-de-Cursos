@@ -7,12 +7,12 @@
         autogenerateselectbutton="True"
         DataSourceID="SqlDataSource1" CssClass="table" AllowPaging="True" DataKeyNames="Id">
         <Columns>
+            <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
             <asp:BoundField DataField="Area" HeaderText="Area" SortExpression="Area" />
             <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
-            <asp:BoundField DataField="Max" HeaderText="Max" SortExpression="Max" />
+            <asp:BoundField DataField="Max" HeaderText="Cupos disponibles" SortExpression="Max" />
             <asp:CheckBoxField DataField="Habilitado" HeaderText="Habilitado" SortExpression="Habilitado" />
-            <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
         </Columns>
 
         <selectedrowstyle backcolor="LightCyan"
@@ -27,7 +27,8 @@
     </asp:SqlDataSource>
     <br />
     <br />
-    <asp:Button ID="botonDetalle" runat="server" Height="71px" OnClick="botonDetalle_Click" Text="Inscribirse" Width="124px" />
+    <asp:Button ID="botonDetalle" runat="server" Height="40px" OnClick="botonDetalle_Click" class="button" Text= "Inscribirse" Width="124px" />
+    <asp:Button ID="Button1" runat="server" Height="40px" Text="Ver Detalle" Width="124px" OnClick="Button1_Click" />
 
 
 <br />

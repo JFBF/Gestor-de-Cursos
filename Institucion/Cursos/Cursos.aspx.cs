@@ -21,7 +21,7 @@ namespace Institucion.Cursos
             {
                 string name = HttpContext.Current.User.Identity.Name;
                 AspNetUser user = cursos.AspNetUsers.Where(u => u.Email == name).First();
-                int id = int.Parse(row.Cells[6].Text);
+                int id = int.Parse(row.Cells[1].Text);
                 //look for a curso with given id
                 Curso curso = cursos.Cursoes.Find(id);
                 Label1.Text = "";
@@ -50,6 +50,21 @@ namespace Institucion.Cursos
                         Label1.Text = "YA SE INSCRIBIÓ AL CURSO";
                     }
                 }
+            }
+            else
+            {
+                Label1.Text = "SELECCIONE UN CURSO";
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            GridViewRow row = GridView1.SelectedRow;
+            if(row != null)
+            {
+                Label1.Text = "";
+                int id = int.Parse(row.Cells[1].Text);
+                Response.Redirect("Detalle.aspx?cursoId="+id);
             }
             else
             {
