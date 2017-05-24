@@ -1525,6 +1525,8 @@ p {
     }
 }
 
+
+
 small, .small {
     font-size: 85%
 }
@@ -3441,6 +3443,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
     border-color: #3a3f44
 }
 
+
     .btn-default:focus, .btn-default.focus {
         color: #ffffff;
         background-color: #232628;
@@ -3730,6 +3733,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
     padding: 14px 16px;
     font-size: 18px;
     line-height: 1.3333333;
+    color:lawngree;
     border-radius: 6px
 }
 
@@ -4651,10 +4655,20 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
     border: 1px solid transparent;
     border-radius: 4px
 }
+.Image1 {
+    position: relative;
+    float: right;
+    margin-right: 135px;
+    padding: 9px 15px;
+    margin-top: -18px;
+    margin-bottom: 8px;
+    border: 1px solid transparent;
+    border-radius: 4px
+}
 
-    .navbar-toggle:focus {
-        outline: 0
-    }
+.navbar-toggle:focus {
+    outline: 0
+}
 
     .navbar-toggle .icon-bar {
         display: block;
